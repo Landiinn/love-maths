@@ -7,13 +7,13 @@ document .addEventListener("DOMContentLoaded", function() {
     for (let button of buttons) {
         button.addEventListener("click", function() {
             if (this.getAttribute("data-type") === "submit") {
-                alert("You clicked Submit!");
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
                 
             }
-        })
+        });
     }
 
     runGame("addition");
@@ -39,7 +39,24 @@ function runGame(gameType) {
     }
 }
 
+/**
+ * Checks the answer against the first element in 
+ * the returned calcualteCorrectAnswer array
+ */
+
 function checkAnswer() {
+
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calcualtedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calcualtedAnswer[0];
+
+    if (isCorrect) {
+        alert("Hey! You got it right! :D");
+    } else {
+        alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calcualtedAnswer[0]}!`);
+    }
+
+    runGame(calcualtedAnswer[1]);
 
 }
 
